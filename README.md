@@ -51,7 +51,7 @@ The Wazuh File Integrity Monitoring Lab is aimed to detect
 
       ![Wazuh agent](https://github.com/user-attachments/assets/bb8cbb5c-0135-4796-bfcc-0d6340f51ea7)
 
-9. I can now start to configure File integrity monitoring on the Windows 2022 server machine. First, I will have to navigate to This PC > Loacl Disk(C:) > Program Files(x86) > ossec-agent and then I will edit the ossec.conf file. Before I make changes, as best practice I will copy the ossec.conf file and rename the copy as ossec-backup.conf just incase I mess up the configuration file later on so I have a clean backup
+9. I can now start to configure File integrity monitoring on the Windows 2022 server machine. First, I will have to navigate to This PC > Local Disk(C:) > Program Files(x86) > ossec-agent and then I will edit the ossec.conf file. Before I make changes, as best practice I will copy the ossec.conf file and rename the copy as ossec-backup.conf just incase I mess up the configuration file later on so I have a clean backup
     
     ![Wazuh backup](https://github.com/user-attachments/assets/a05aa920-4006-4b85-8a0c-7e2d40c380fc)
 
