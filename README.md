@@ -67,3 +67,30 @@ The Wazuh File Integrity Monitoring Lab is aimed to detect
 	- The default setting for File Integrity Monitoring (FIM) is to check for changes every 12 hours, I have added realtime="yes" which makes it so FIM checks for changes in realtime.
 
 ![Wazuh Realtime](https://github.com/user-attachments/assets/6ba1502a-2fec-4344-be91-530ddbe1716c)
+
+12. Now FIM is set up and let's simulate an event. I will create a file called evil-malware in the Public directory. As you can see in the Wazuh dashboard, we have an event which has identified a file that was ADDED under the C:\users\public\pictures directories as "evil-malware".
+
+ ![image](https://github.com/user-attachments/assets/47c45d18-0937-4895-a835-c5cb7b2cb141)
+
+
+ ![Wazuh evil-malware as Event](https://github.com/user-attachments/assets/e6bcda90-d32a-44f5-9308-e2ee292bb0cc)
+ 
+  Clicking the side arrow we can look at more specific information relation to this event. We can see the agent ID, IP, and name. We can also see the path and file that was added.
+   
+   ![Wazuh new fields](https://github.com/user-attachments/assets/203bf0e7-4072-405e-a6c8-e9feccafd2ee)
+
+   
+   
+   You are also supplied with the MD5, SHA1 and SHA256 hash values of the file which is really interesting as you can compare those hashes using open-source intelligence like VirusTotal to help investigate the suspected file
+
+![Wazuh new hash](https://github.com/user-attachments/assets/8ca2de42-9a46-440b-8341-7e5138f890f4)
+
+13. In this next simulation, I am going to show a different scenario where FIM will be very useful. There are Bank records that are NOT to be modified ever. This will show how FIM can detect files that have been modified.
+
+14. I have created a file in the public\documents directory called "bank records.txt" and have added text as "200.00" and then saved the file. I then opened the file back up and changed the text to "20000.00" and saved it.
+
+ ![Wazuh Bank record modified](https://github.com/user-attachments/assets/7822954a-0896-475f-a2a7-481c9a472649)
+
+
+
+
