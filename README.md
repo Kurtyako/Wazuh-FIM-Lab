@@ -85,11 +85,23 @@ The Wazuh File Integrity Monitoring Lab is aimed to detect
 
 ![Wazuh new hash](https://github.com/user-attachments/assets/8ca2de42-9a46-440b-8341-7e5138f890f4)
 
-13. In this next simulation, I am going to show a different scenario where FIM will be very useful. There are Bank records that are NOT to be modified ever. This will show how FIM can detect files that have been modified.
+In this next simulation, I am going to show a different scenario where FIM will be very useful. There are Bank records that are NOT to be modified ever. This will show how FIM can detect files that have been modified.
 
-14. I have created a file in the public\documents directory called "bank records.txt" and have added text as "200.00" and then saved the file. I then opened the file back up and changed the text to "20000.00" and saved it.
+13. I have created a file in the public\documents directory called "classified bank records.txt" and have added text as "200.00" and then saved the file. I then opened the file back up and changed the text to "20000.00" and saved it.
+
+ As show in the picture we can clearly see that this classified file never to be modified has been modified, We are now alerted and can begin an investigation into this incident.
 
  ![Wazuh Bank record modified](https://github.com/user-attachments/assets/7822954a-0896-475f-a2a7-481c9a472649)
+ 
+Now I want to show another use for FIM. We can set up FIM to monitor registry keys which are commonly used for persistence. To simulate this I will create a registry key under the HKey local machine run key which will be named "UnusualFile-evil"
+
+
+ 
+![Wazuh REgkey](https://github.com/user-attachments/assets/83736ffa-18e7-4ca2-bb49-d25af9ac1516)
+
+ 
+
+ 
 
 
 
