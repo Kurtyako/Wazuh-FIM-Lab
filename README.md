@@ -96,12 +96,38 @@ In this next simulation, I am going to show a different scenario where FIM will 
 Now I want to show another use for FIM. We can set up FIM to monitor registry keys which are commonly used for persistence. To simulate this I will create a registry key under the HKey local machine run key which will be named "UnusualFile-evil"
 
 
- 
+![Wazuh powershelll](https://github.com/user-attachments/assets/a05b7b7d-ef2b-4447-b3af-b1e23335e8e5)
 ![Wazuh REgkey](https://github.com/user-attachments/assets/83736ffa-18e7-4ca2-bb49-d25af9ac1516)
 
- 
 
- 
+# Advanced Settings 
+
+14. Now that we have gone over the basics of FIM, I want to get into some advanced configurations including who made changes to the file and what program or process was used by enabling whodata. Also to note, whodata automatically checks for changes using real time.
+
+- Open up ossec.conf and replace the realtime attribute with whodata
+
+ ![Wazuh who data new](https://github.com/user-attachments/assets/9d19f1ca-3bf5-4eba-80f1-8817123c3e7c)
+  - Enabling whodata will add these fields to the alert
+
+![Waazuh whodtaa](https://github.com/user-attachments/assets/0da08638-3ed7-4c70-9198-fa1f54ca38cb)
+
+15. Another addition that we can use to provide us even more data is the report_changes attribute. You can use whodata and report_changes together like so: 
+
+ ![Wazuh who data and report changes](https://github.com/user-attachments/assets/f40b4c7f-6813-408c-889f-b2fae3dfcf87)
+
+ 16. One last scenario to show how whodata and report_changes can work together. I have created a school grades file with students grades
+
+ ![Wazuh school Grades part 2](https://github.com/user-attachments/assets/1555e198-c16b-4c89-9e4d-2e23751753a9)
+
+ 19. I have gone into that file and changed the student's grades and Wazuh made an alert. Before we couldn't tell much more than it has been changed, but lets take a look into the alert fields with our new attributes.
+     
+![Wazuh school Grades ](https://github.com/user-attachments/assets/201471b3-d3c1-4d66-b621-b83c43f96b5f)
+
+
+
+
+
+
 
 
 
