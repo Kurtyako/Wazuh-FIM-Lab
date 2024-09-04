@@ -51,7 +51,19 @@ The Wazuh File Integrity Monitoring Lab is aimed to detect
 
       ![Wazuh agent](https://github.com/user-attachments/assets/bb8cbb5c-0135-4796-bfcc-0d6340f51ea7)
 
-9. I can now start to configure File integrity monitoring on the Windows 2022 server machine. First, I will have to navigate to This PC > Local Disk(C:) > Program Files(x86) > ossec-agent and then I will edit the ossec.conf file. Before I make changes, as best practice I will copy the ossec.conf file and rename the copy as ossec-backup.conf just incase I mess up the configuration file later on so I have a clean backup
+9. I can now start to configure File integrity monitoring on the Windows 2022 server machine. First, I will have to navigate to This PC > Local Disk(C:) > Program Files(x86) > ossec-agent and then I will edit the ossec.conf file. Before I make changes, as best practice I will copy the ossec.conf file and rename the copy as ossec-backup.conf just incase I mess up the configuration file later on so I have a clean backup.
     
     ![Wazuh backup](https://github.com/user-attachments/assets/a05aa920-4006-4b85-8a0c-7e2d40c380fc)
 
+10. Since the Public and Temp directories are common places for attackers to upload their tool sets. I will select one for this lab, which will be the Public directory.
+
+
+11. I will open up the ossec.conf file and will start to configure the File Ingtegrity Monitoring to monitor the Public directory. I will copy and paste one of the lines under the "Default files to be monitored" as I will make changes to the line to fit my needs.
+
+	- The first edit will be to add the path of the dirctory that I want to be monitored which is C:\Users\Public
+
+	- Next, I will remove the recursion level section, leaving recursion in it will only monitor that directory and no further. To make sure the monitoring can go through multiple levels it needs to be removed and then it will monitor everything in the public directory. In my case, I do not know how many levels I will need to monitor and this will fulfill my needs.
+
+	- The default setting for File Integrity Monitoring (FIM) is to check for changes every 12 hours, I have added realtime="yes" which makes it so FIM checks for changes in realtime.
+
+![Wazuh Realtime](https://github.com/user-attachments/assets/6ba1502a-2fec-4344-be91-530ddbe1716c)
