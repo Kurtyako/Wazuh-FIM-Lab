@@ -5,7 +5,6 @@
 The Wazuh File Integrity Monitoring Lab is aimed to detect 
 
 ### Skills Learned
-[Bullet Points - Remove this afterwards]
 
 - Security Knowledge:I have deepened my understanding of how to detect and respond to unauthorized changes in files, which is crucial for maintaining the integrity and security of systems.
 
