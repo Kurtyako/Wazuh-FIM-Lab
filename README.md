@@ -2,7 +2,7 @@
 
 ## Objective
 
-The Wazuh File Integrity Monitoring Lab is aimed to detect 
+The Wazuh File Integrity Monitoring (FIM) Lab is aimed to showcase how useful and powerful a FIM can be to protect sensitive files and system configurations by being able to detect and create alerts when files get created, deleted, or modified.
 
 ### Skills Learned
 
@@ -24,11 +24,13 @@ The Wazuh File Integrity Monitoring Lab is aimed to detect
 
 ## Steps
 
-1. For this Lab I will be using two virtual machines. One Machine will contain a pre-built virtual machine image in an Open Virtual Appliance(OVA) format containing the following components: Wazuh's manager, indexer, and dashboard. I will use this Wazuh OVA image with Oracle VM Virtual Box. The other virtual machine will be a Windows Server 2022 as my target machine.
+For this Lab I will be using two virtual machines. One Machine will contain a pre-built virtual machine image in an Open Virtual Appliance(OVA) format containing the following components: Wazuh's manager, indexer, and dashboard. I will use this Wazuh OVA image with Oracle VM Virtual Box. The other virtual machine will be a Windows Server 2022 as my target machine.
+
+1. Starting Windows Server 2022 and Wazuh OVA machine in Virtual Box.   
 
 	![Wazuh virtual box](https://github.com/user-attachments/assets/a1a0d240-cab6-421d-9bad-6ae4ab06e32f)
 
-2. After getting both the virtual machines up and running my next step is to get the Wazuh agent installed on the Windows 2022 server. From the official Wazuh documentation website, I can download the Wazuh agent and it will look like this when complete:
+3. After getting both the virtual machines up and running my next step is to get the Wazuh agent installed on the Windows 2022 server. From the official Wazuh documentation website, I can download the Wazuh agent and it will look like this when complete:
    
 	![download](https://github.com/user-attachments/assets/69024763-cb23-40e9-8020-79f9b57da560)
 
@@ -58,7 +60,7 @@ The Wazuh File Integrity Monitoring Lab is aimed to detect
     
    	 ![Wazuh backup](https://github.com/user-attachments/assets/a05aa920-4006-4b85-8a0c-7e2d40c380fc)
 
-11. Since the Public and Temp directories are common places for attackers to upload their tool sets. I will select one for this lab, which will be the Public directory.
+Since the Public and Temp directories are common places for attackers to upload their tool sets. I will select one for this lab, which will be the Public directory.
 
 
 12. I will open up the ossec.conf file and will start to configure the File Ingtegrity Monitoring to monitor the Public directory. I will copy and paste one of the lines under the "Default files to be monitored" as I will make changes to the line to fit my needs.
