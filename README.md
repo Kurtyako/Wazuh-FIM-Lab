@@ -133,7 +133,7 @@ Now I want to show another use for FIM. We can set up FIM to monitor registry ke
  
 ![Wazuh school Grades part 3](https://github.com/user-attachments/assets/e3886ecd-dfd6-4abf-b27d-e93aa51cc27e)
 
-Looking at the syscheck.diff, our original value is above the line and the modified value is below the line. As you can see FIM is very powerful for detecting unauthorized changes to files and system configurations when implemented.
+Looking at the syscheck.diff our original value is above the line and the modified value is below the line. As you can see FIM is very powerful for detecting unauthorized changes to files and system configurations when implemented.
 
 
 
