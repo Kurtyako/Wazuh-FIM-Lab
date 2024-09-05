@@ -24,45 +24,46 @@ The Wazuh File Integrity Monitoring Lab is aimed to detect
 
 ## Steps
 
-*Ref 1: Network Diagram*
+1. For this Lab I will be using two virtual machines. One Machine will contain a pre-built virtual machine image in an Open Virtual Appliance(OVA) format containing the following components: Wazuh's manager, indexer, and dashboard. I will use this Wazuh OVA image with Oracle VM Virtual Box. The other virtual machine will be a Windows Server 2022 as my target machine.
 
-1. For this Lab I will be using two virtual machines. One Machine will contain a pre-built virtual machine image in an Open Virtual Appliance(OVA) format containing the following components: Wazuh's manager, indexer, and dashboard. I will use this Wazuh OVA image with Oracle VM Virtual Box. The other virtual machine will be a Windows Server 2022 as my target machine
+	![Wazuh virtual box](https://github.com/user-attachments/assets/a1a0d240-cab6-421d-9bad-6ae4ab06e32f)
 
-     ![Wazuh virtual box](https://github.com/user-attachments/assets/a1a0d240-cab6-421d-9bad-6ae4ab06e32f)
+2. After getting both the virtual machines up and running my next step is to get the Wazuh agent installed on the Windows 2022 server. From the official Wazuh documentation website, I can download the Wazuh agent and it will look like this when complete:
+   
+	![download](https://github.com/user-attachments/assets/69024763-cb23-40e9-8020-79f9b57da560)
 
-2. After getting both the virtual machines up and running my next step is to get the Wazuh agent installed on the Windows 2022 server. From the official Wazuh documentation website, I can download the Wazuh agent and it will look like this when complete: 
-![download](https://github.com/user-attachments/assets/69024763-cb23-40e9-8020-79f9b57da560)
+4. Now I need to get the Wazuh server IP adress and the authentication key to link the Wazuh server to the Wazuh Agent.
 
-3. Now I need to get the Wazuh server IP adress and the authentication key to link the Wazuh server to the Wazuh Agent
+5. To go the IP address I will run the "ip a" command:
+   
+	![wazuh ip](https://github.com/user-attachments/assets/bfb8e0f2-4cfb-48e3-8072-76b7cfecc7d9)
 
-4. To go the IP address I will run the "ip a" command:
- ![wazuh ip](https://github.com/user-attachments/assets/bfb8e0f2-4cfb-48e3-8072-76b7cfecc7d9)
+6. Next I will get the authenticaion key by accessing /var/ossec/bin/manage_agents on the Wazuh Manger host.
+   
+	![Wazuh agetn key](https://github.com/user-attachments/assets/c75a97c1-206d-4954-8927-31e465b636f6)
 
-5. Next I will get the authenticaion key by accessing /var/ossec/bin/manage_agents on the Wazuh Manger host
-![Wazuh agetn key](https://github.com/user-attachments/assets/c75a97c1-206d-4954-8927-31e465b636f6)
+7. Turning back to the Windows Server 2022 when can import our findings for the IP adress and the authentication key.
 
-6. Turning back to the Windows Server 2022 when can import our findings for the IP adress and the authentication key
+	 ![Wazuh windows key](https://github.com/user-attachments/assets/4ca85ed1-32bd-41fa-955c-c3db8195b87c)
 
-    ![Wazuh windows key](https://github.com/user-attachments/assets/4ca85ed1-32bd-41fa-955c-c3db8195b87c)
+8. Now to confirm we have set Wazuh up correctly I will try and access the Wazuh dashboard using the IP address of the Wazuh host which is 192.168.100.131 in Firefox.
 
-7. Now to confirm we have set Wazuh up correctly I will try and access the Wazuh dashboard using the IP address of the Wazuh host which is 192.168.100.131 in Firefox
+	 ![wazuh dashboard](https://github.com/user-attachments/assets/be0a8705-c5b6-44d0-b66e-b4fbd51e2c77)
 
-   ![wazuh dashboard](https://github.com/user-attachments/assets/be0a8705-c5b6-44d0-b66e-b4fbd51e2c77)
+9. After I signed in I can see that the agent is active.
 
-8. After I signed in I can see that the agent is active
+	![Wazuh agent](https://github.com/user-attachments/assets/bb8cbb5c-0135-4796-bfcc-0d6340f51ea7)
 
-      ![Wazuh agent](https://github.com/user-attachments/assets/bb8cbb5c-0135-4796-bfcc-0d6340f51ea7)
-
-9. I can now start to configure File integrity monitoring on the Windows 2022 server machine. First, I will have to navigate to This PC > Local Disk(C:) > Program Files(x86) > ossec-agent and then I will edit the ossec.conf file. Before I make changes, as best practice I will copy the ossec.conf file and rename the copy as ossec-backup.conf just incase I mess up the configuration file later on so I have a clean backup.
+10. I can now start to configure File integrity monitoring on the Windows 2022 server machine. First, I will have to navigate to This PC > Local Disk(C:) > Program Files(x86) > ossec-agent and then I will edit the ossec.conf file. Before I make changes, as best practice I will copy the ossec.conf file and rename the copy as ossec-backup.conf just incase I mess up the configuration file later on so I have a clean backup.
     
-    ![Wazuh backup](https://github.com/user-attachments/assets/a05aa920-4006-4b85-8a0c-7e2d40c380fc)
+   	 ![Wazuh backup](https://github.com/user-attachments/assets/a05aa920-4006-4b85-8a0c-7e2d40c380fc)
 
-10. Since the Public and Temp directories are common places for attackers to upload their tool sets. I will select one for this lab, which will be the Public directory.
+11. Since the Public and Temp directories are common places for attackers to upload their tool sets. I will select one for this lab, which will be the Public directory.
 
 
-11. I will open up the ossec.conf file and will start to configure the File Ingtegrity Monitoring to monitor the Public directory. I will copy and paste one of the lines under the "Default files to be monitored" as I will make changes to the line to fit my needs.
+12. I will open up the ossec.conf file and will start to configure the File Ingtegrity Monitoring to monitor the Public directory. I will copy and paste one of the lines under the "Default files to be monitored" as I will make changes to the line to fit my needs.
 
-	- The first edit will be to add the path of the dirctory that I want to be monitored which is C:\Users\Public
+	- The first edit will be to add the path of the dirctory that I want to be monitored which is C:\Users\Public.
 
 	- Next, I will remove the recursion level section, leaving recursion in it will only monitor that directory and no further. To make sure the monitoring can go through multiple levels it needs to be removed and then it will monitor everything in the public directory. In my case, I do not know how many levels I will need to monitor and this will fulfill my needs.
 
@@ -75,15 +76,15 @@ The Wazuh File Integrity Monitoring Lab is aimed to detect
  ![image](https://github.com/user-attachments/assets/47c45d18-0937-4895-a835-c5cb7b2cb141)
 
 
- ![Wazuh evil-malware as Event](https://github.com/user-attachments/assets/e6bcda90-d32a-44f5-9308-e2ee292bb0cc)
+![Wazuh evil-malware as Event](https://github.com/user-attachments/assets/e6bcda90-d32a-44f5-9308-e2ee292bb0cc)
  
   Clicking the side arrow we can look at more specific information relation to this event. We can see the agent ID, IP, and name. We can also see the path and file that was added.
    
-   ![Wazuh new fields](https://github.com/user-attachments/assets/203bf0e7-4072-405e-a6c8-e9feccafd2ee)
+  ![Wazuh new fields](https://github.com/user-attachments/assets/203bf0e7-4072-405e-a6c8-e9feccafd2ee)
 
    
    
-   You are also supplied with the MD5, SHA1 and SHA256 hash values of the file which is really interesting as you can compare those hashes using open-source intelligence like VirusTotal to help investigate the suspected file
+   You are also supplied with the MD5, SHA1 and SHA256 hash values of the file which is really interesting as you can compare those hashes using open-source intelligence like VirusTotal to help investigate the suspected file.
 
 ![Wazuh new hash](https://github.com/user-attachments/assets/8ca2de42-9a46-440b-8341-7e5138f890f4)
 
@@ -93,9 +94,9 @@ In this next simulation, I am going to show a different scenario where FIM will 
 
  As show in the picture we can clearly see that this classified file never to be modified has been modified, We are now alerted and can begin an investigation into this incident.
 
- ![Wazuh Bank record modified](https://github.com/user-attachments/assets/7822954a-0896-475f-a2a7-481c9a472649)
+![Wazuh Bank record modified](https://github.com/user-attachments/assets/7822954a-0896-475f-a2a7-481c9a472649)
  
-Now I want to show another use for FIM. We can set up FIM to monitor registry keys which are commonly used for persistence. To simulate this I will create a registry key under the HKey local machine run key which will be named "UnusualFile-evil"
+Now I want to show another use for FIM. We can set up FIM to monitor registry keys which are commonly used for persistence. To simulate this I will create a registry key under the HKey local machine run key which will be named "UnusualFile-evil".
 
 
 ![Wazuh powershelll](https://github.com/user-attachments/assets/a05b7b7d-ef2b-4447-b3af-b1e23335e8e5)
@@ -106,26 +107,27 @@ Now I want to show another use for FIM. We can set up FIM to monitor registry ke
 
 14. Now that we have gone over the basics of FIM, I want to get into some advanced configurations including who made changes to the file and what program or process was used by enabling whodata. Also to note, whodata automatically checks for changes using real time.
 
-- Open up ossec.conf and replace the realtime attribute with whodata
+- Open up ossec.conf and replace the realtime attribute with whodata.
 
- ![Wazuh who data new](https://github.com/user-attachments/assets/9d19f1ca-3bf5-4eba-80f1-8817123c3e7c)
-  - Enabling whodata will add these fields to the alert
+![Wazuh who data new](https://github.com/user-attachments/assets/9d19f1ca-3bf5-4eba-80f1-8817123c3e7c)
+
+  - Enabling whodata will add these fields to the alert.
 
 ![Waazuh whodtaa](https://github.com/user-attachments/assets/0da08638-3ed7-4c70-9198-fa1f54ca38cb)
 
 15. Another addition that we can use to provide us even more data is the report_changes attribute. You can use whodata and report_changes together like so: 
 
- ![Wazuh who data and report changes](https://github.com/user-attachments/assets/f40b4c7f-6813-408c-889f-b2fae3dfcf87)
+![Wazuh who data and report changes](https://github.com/user-attachments/assets/f40b4c7f-6813-408c-889f-b2fae3dfcf87)
 
- 16. One last scenario to show how whodata and report_changes can work together. I have created a school grades file with students grades
+ 16. One last scenario to show how whodata and report_changes can work together. I have created a school grades file with students grades.
 
- ![Wazuh school Grades part 2](https://github.com/user-attachments/assets/1555e198-c16b-4c89-9e4d-2e23751753a9)
+![Wazuh school Grades part 2](https://github.com/user-attachments/assets/1555e198-c16b-4c89-9e4d-2e23751753a9)
 
  19. I have gone into that file and changed the student's grades and Wazuh made an alert.
      
 ![Wazuh school Grades ](https://github.com/user-attachments/assets/201471b3-d3c1-4d66-b621-b83c43f96b5f)
 
- Before we couldn't tell much more than it has been changed, but let's take a look into the alert fields with our new attributes
+ Before we couldn't tell much more than it has been changed, but let's take a look into the alert fields with our new attributes.
  
 ![Wazuh school Grades part 3](https://github.com/user-attachments/assets/e3886ecd-dfd6-4abf-b27d-e93aa51cc27e)
 
